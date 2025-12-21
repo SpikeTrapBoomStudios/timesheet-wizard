@@ -1,0 +1,13 @@
+# Python
+app/__pycache__/
+venv/
+*.pyc
+
+# IDEs
+app/.vscode/
+
+# Project specific
+app/build/
+app/dist/
+app/assets/file_icon/icon.pdn
+app.code-workspace
