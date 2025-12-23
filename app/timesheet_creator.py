@@ -30,7 +30,7 @@ def create_timesheets(
     ) -> bool:
 
     # Load src and template workbooks
-    src_wb: Workbook = openpyxl.load_workbook(source_file_path)
+    src_wb: Workbook = openpyxl.load_workbook(source_file_path, data_only=True)
     src_ws = src_wb[source_sheet_name]
     tmpl_wb: Workbook = openpyxl.load_workbook(template_file_path)
     base_sheet = tmpl_wb["Template"]
