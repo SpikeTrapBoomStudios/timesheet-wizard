@@ -35,12 +35,6 @@ def create_timesheets(
     tmpl_wb: Workbook = openpyxl.load_workbook(template_file_path)
     base_sheet = tmpl_wb["Template"]
 
-    # Get the indecies of the total hours, reg hours, and OT hours
-    headers = [cell.value for cell in next(src_ws.iter_rows(min_row=1, max_row=1))]
-    total_hours_col: int = headers.index("Total Hours")
-    total_reg_col: int = headers.index("Total REG")
-    total_ot_col: int = headers.index("Total OT")
-
     min_row = int(row_range[0])
     max_row = int(row_range[1]) if row_range[1] != math.inf else src_ws.max_row
     for row in src_ws.iter_rows(min_row=min_row, max_row=max_row, values_only=True):
@@ -61,7 +55,7 @@ def create_timesheets(
         new_sheet["A16"].value = f"Location: {location}"
 
         # Grab and populate the clock in/out and total hours for each day
-        daily_clock_data: list = rest[: (len(rest) - 3)]
+        daily_clock_data: list = rest[:-3]
         for i in range(int(len(daily_clock_data) / 3)):
             clock_in = daily_clock_data[i*3]
             clock_out = daily_clock_data[i*3+1]
@@ -77,9 +71,8 @@ def create_timesheets(
             new_sheet[f"A{i+2}"].value = date.strftime("%m/%d/%Y")
         
         # Grab and populate the total, reg, and OT hours
-        total_hours = row[total_hours_col]
-        total_reg = row[total_reg_col]
-        total_ot = row[total_ot_col]
+        total_reg, total_ot, total_hours = rest[-3:]
+
         new_sheet["D16"].value = f"Regular: {round(float(total_reg), 2)}"
         new_sheet["E16"].value = f"OverTime: {round(float(total_ot), 2)}"
         new_sheet["F16"].value = f"Total Hours: {round(float(total_hours), 2)}"
