@@ -1,3 +1,5 @@
 An app that builds timesheets based on raw time data.
 
 **NOTE:** If you are on Linux, then `pip install -r requirements.txt` will fail. This is because this app utilized a windows-only python package to build a PDF from the exported xlsx file. However, the app still works on Linux, just without this feature. **To build on linux, use the command:** `cat requirements.txt | xargs -n 1 pip install`
+
+_This project uses Pyinstaller to create executables from the python code. See the provided .spec files in this repository to easily build said executables with `pyinstaller <SPEC FILE NAME>.spec`. Note that due to the nature of Pyinstaller, Windows EXEs may only be made when you are using Windows, and Linux executables can only be made when you are using Linux. This can easily be circumvented by setting up a Windows VM on Linux, or vice versa. You may also try your hand at using Wine to run pyinstaller to make Windows EXEs on Linux, however the stability of this approach is questionable and it is harder to setup and understand than a simple VM._
