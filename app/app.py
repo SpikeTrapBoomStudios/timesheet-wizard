@@ -13,7 +13,7 @@ import math
 from resources import resource_path
 from PySide6.QtWidgets import QMessageBox
 import os
-import win32com.client
+import platform
 
 
 class MainWindow(QMainWindow):
@@ -119,9 +119,9 @@ class MainWindow(QMainWindow):
                 return
 
             success = create_timesheets(
-                source_file_path=self.source_path,
-                source_sheet_name=self.source_sheet_name,
-                template_file_path=resource_path("assets", "timesheet_template.xlsx"),
+                source_file_path = self.source_path,
+                source_sheet_name = self.source_sheet_name,
+                template_file_path = resource_path("assets", "timesheet_template.xlsx"),
                 output_file_path=user_save_path,
                 start_date=self.start_date,
                 row_range=self.row_range
@@ -143,8 +143,16 @@ class MainWindow(QMainWindow):
             else:
                 QMessageBox.critical(self, "Error", "An error occurred while creating the timesheets.")
     
-    # Risky method, thats why there are so many try/excepts. Windows-only.
+    # Risky method, that's why there are so many try/excepts. Windows-only.
     def _excel_to_pdf(self, excel_file_path: str, output_pdf_path: str) -> bool:
+        if not platform.system() == "Windows":
+            QMessageBox.warning(self, "Error converting to PDF", "Unable to convert the timesheets to PDF. Note: This is a windows only feature currently.")
+            return False
+        try:
+            import win32com.client
+        except:
+            print("Could not import win32com")
+            return False
         try:
             excel_path = os.path.abspath(excel_file_path)
             pdf_path = os.path.abspath(output_pdf_path)
