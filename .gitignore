@@ -17,3 +17,4 @@ app.dist/
 app/.idea
 .python-version
 build/
+dist/
