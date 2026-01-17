@@ -11,8 +11,9 @@ app/build/
 app/dist/
 app/assets/file_icon/icon.pdn
 app.code-workspace
-app/*exe
-app/*bin
+*exe
+*bin
 app.dist/
 app/.idea
 .python-version
+build/

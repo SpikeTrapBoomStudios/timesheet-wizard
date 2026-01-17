@@ -81,7 +81,7 @@ def create_timesheets(
 
     try:
         tmpl_wb.save(output_file_path)
-        show_in_file_manager(output_file_path)
+        show_in_file_manager(os.path.normpath(output_file_path))
         
         return True
     except Exception as e:
