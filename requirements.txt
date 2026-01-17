@@ -1,0 +1,14 @@
+et_xmlfile==2.0.0
+Nuitka==2.8.9
+openpyxl==3.1.5
+ordered-set==4.1.0
+packaging==25.0
+PySide6==6.10.1
+PySide6_Addons==6.10.1
+PySide6_Essentials==6.10.1
+python-dateutil==2.9.0.post0
+pyxdg==0.28
+shiboken6==6.10.1
+show-in-file-manager==1.1.5
+six==1.17.0
+zstandard==0.25.0
